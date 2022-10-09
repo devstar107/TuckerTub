@@ -1,0 +1,473 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Madelyn Regular";
+  font-display: swap;
+  src: url("/assets/fonts/madelyn-regular-font.woff2") format("woff2"),
+    url("/assets/fonts/madelyn-regular-font.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Tucker Tub";
+  font-display: swap;
+  src: url("/assets/fonts/TuckerTub.woff2") format("woff2"),
+    url("/assets/fonts/TuckerTub.woff") format("woff");
+}
+
+.font-madelyn {
+  font-family: "Madelyn Regular";
+}
+.font-tucker-tub {
+  font-family: "Tucker Tub";
+}
+
+/* https://tailwindcss.com/docs/adding-base-styles */
+
+:root {
+  --footer-height: 10vh;
+  --navbar-height: 10vh;
+  --announcement-bar-height: 40px;
+}
+
+@layer base {
+  h1 {
+    @apply py-6 text-3xl font-bold;
+  }
+  h2 {
+    @apply py-4 text-2xl font-bold;
+  }
+  h3 {
+    @apply py-4 text-xl font-bold;
+  }
+  h4 {
+    @apply py-4 text-lg font-bold;
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl p-4 md:p-6 lg:p-8 xl:p-10 m-auto;
+  }
+
+  a.primary-link {
+    @apply text-lg;
+  }
+
+  input.primary-input,
+  textarea.primary-input {
+    @apply py-2 px-4 w-full text-md text-colorFourteen rounded-lg border-[3px] border-transparent transition duration-500 ease-in-out;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    @apply text-colorFourteen;
+  }
+
+  input.primary-input-isValid,
+  textarea.primary-input-isValid {
+    @apply !border-colorTen;
+  }
+
+  input.primary-input-isInvalid,
+  textarea.primary-input-isInvalid {
+    @apply !border-colorThirteen;
+  }
+
+  input[type="text"]:focus,
+  textarea:focus {
+    box-shadow: none;
+  }
+
+  button:disabled {
+    @apply !bg-colorFive;
+  }
+
+  .preflight-escape ol {
+    display: block;
+    list-style-type: decimal;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 40px;
+  }
+
+  .preflight-escape ul {
+    display: block;
+    list-style-type: disc;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 40px;
+  }
+
+  .preflight-escape p {
+    @apply py-2;
+  }
+}
+
+/* Apply basic global styles to the body: */
+body {
+  @apply antialiased break-words font-haboro-soft text-mdlg text-black bg-white dark:bg-black dark:text-white;
+}
+
+/* Remove trailing margin from forms for some browsers: */
+form {
+  margin-block-end: 0;
+}
+
+/* NOTE: Webkit autofill can be very annoying, and leave the auto-filled content invisible to the user. */
+/* We try to avoid this by setting this to a sane default, which seems to work based on some experimentation. */
+input:-webkit-autofill {
+  -webkit-text-fill-color: theme("colors.gray.800") !important;
+}
+
+/* This correctly styles the minimal progress bar that is displayed when navigating between pages */
+#nprogress {
+  @apply z-50 pointer-events-none;
+}
+
+#nprogress .bar {
+  @apply bg-[slateblue] fixed z-50 top-0 left-0 w-full h-0.5;
+}
+
+/* Navbar */
+
+span.hamburger-span {
+  position: absolute;
+  height: 0.48rem;
+  width: 3.3rem;
+  left: 50%;
+  border-radius: 0.3rem;
+  transition: all 0.25s ease-in-out, background-color 0s ease-in-out;
+  @apply bg-black dark:bg-white;
+}
+
+span.middle-span {
+  @apply top-2/4 -translate-x-2/4 -translate-y-2/4;
+}
+
+/* Modal */
+
+#modal-container ul li {
+  padding: 1rem 0;
+}
+
+#modal-container ul li a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.4s ease;
+}
+
+#modal-container ul li a:hover {
+  color: #62ff62;
+}
+
+/* Cart */
+
+#cart-component-link:focus,
+.mega-menu-link:focus {
+  outline: none;
+}
+
+/* #cart-component-link:focus-visible,
+.mega-menu-link:focus-visible {
+  outline: 2px solid blue;
+} */
+
+/* Cart Modal Overlay */
+
+.ReactModal_cart_overlay::after {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  content: "";
+  width: 100vw;
+  height: 100vh;
+  z-index: 1401;
+  background-color: rgba(0, 0, 0, 0.45);
+}
+
+/* Google Maps */
+
+.map-container {
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#google-map-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+}
+
+.curve {
+  -webkit-clip-path: url(#clip);
+}
+
+@media (max-width: 480px) {
+  .sliderimg {
+    background-position: 0px center;
+  }
+  .sliderhome {
+    background-position: -300px center;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 1024px) {
+  .sliderimg {
+    background-position: 100px center;
+  }
+  .sliderhome {
+    background-position: 0px center;
+  }
+}
+
+@media (min-width: 1025px) {
+  .sliderimg {
+    background-position: 400px center;
+  }
+  .sliderhome {
+    background-position: 200px center;
+  }
+}
+
+.stepper-one {
+  clip-path: polygon(85% 0%, 100% 50%, 85% 100%, 0% 100%, 0 52%, 0% 0%);
+}
+
+.stepper-two {
+  clip-path: polygon(85% 0%, 100% 50%, 85% 100%, 0% 100%, 15% 50%, 0% 0%);
+}
+
+.stepper-three{
+  clip-path: polygon(100% 0, 100% 55%, 100% 100%, 0% 100%, 15% 50%, 0% 0%);
+}
+
+
+/* Embla Carousel */
+.embla {
+  overflow: hidden;
+}
+
+.embla__container {
+  /* height: calc(100vh - var(--navbar-height) - var(--announcement-bar-height)); */
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.embla__img {
+  object-fit: cover;
+}
+
+.embla__slide {
+  position: relative;
+}
+.embla__products{
+  animation: mymove 90s infinite;
+  animation-timing-function: linear;
+}
+@keyframes mymove {
+  from {left: 0%;}
+  to {left: -90%;}
+}
+
+.embla__products:hover{
+  animation-play-state: paused;
+  cursor: pointer;
+}
+
+/* Custom Embla */
+
+.embla__viewport.is-draggable {
+  cursor: move;
+  cursor: grab;
+}
+
+.embla__viewport.is-dragging {
+  cursor: grabbing;
+}
+
+.embla__dots {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  position: absolute;
+  left: 50%;
+  bottom: 2.5%;
+  transform: translate(-50%, -50%);
+}
+
+.embla__dot {
+  background-color: transparent;
+  cursor: pointer;
+  position: relative;
+  padding: 0;
+  outline: 0;
+  border: 0;
+  width: 16px;
+  height: 16px;
+  margin-right: 7.5px;
+  margin-left: 7.5px;
+  display: flex;
+  align-items: center;
+}
+
+.embla__dot:after {
+  background-color: rgba(255, 255, 255, 0.3);
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  content: "";
+}
+
+.embla__dot.is-selected:after {
+  background-color: rgba(255, 255, 255, 1);
+  opacity: 1;
+}
+
+/* Custom Embla Fade for Hero Slider */
+
+.embla__slide__hero {
+  position: relative;
+  opacity: 0.8;
+  transition: opacity 0.8s;
+}
+
+.embla__slide__hero.is-active-slide {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* Custom Embla Product Page */
+
+.product-page-embla {
+  position: relative;
+  background-color: #f7f7f7;
+  padding: 20px;
+  max-width: 670px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.product-page-embla__viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.product-page-embla__viewport.is-draggable {
+  cursor: move;
+  cursor: grab;
+}
+
+.product-page-embla__viewport.is-dragging {
+  cursor: grabbing;
+}
+
+.product-page-embla__container {
+  display: flex;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -khtml-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  margin-left: -10px;
+}
+
+.product-page-embla__slide {
+  padding-left: 10px;
+  min-width: 100%;
+  position: relative;
+}
+
+.product-page-embla__slide__inner {
+  position: relative;
+  overflow: hidden;
+  height: 190px;
+}
+
+.product-page-embla__slide__img {
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  width: auto;
+  min-height: 100%;
+  min-width: 100%;
+  max-width: none;
+  transform: translate(-50%, -50%);
+}
+
+.product-page-embla--thumb {
+  padding-top: 0;
+  margin-top: -12px;
+}
+
+.product-page-embla__container--thumb {
+  cursor: default;
+  margin-left: -8px;
+}
+
+.product-page-embla__slide--thumb {
+  padding-left: 8px;
+  min-width: 20%;
+}
+
+.product-page-embla__slide__inner--thumb {
+  touch-action: manipulation;
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+  margin: 0;
+  padding: 0;
+  height: 100px;
+  width: 100%;
+  background-color: transparent;
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+.product-page-embla__slide__thumbnail {
+  position: absolute;
+  opacity: 0.2;
+  top: 0;
+  bottom: 0;
+  left: -10000%;
+  right: -10000%;
+  margin: auto;
+  min-width: 1000%;
+  min-height: 1000%;
+  max-width: none;
+  transform: scale(0.1);
+  transition: opacity 0.2s;
+}
+
+.product-page-embla__slide--thumb.is-selected .embla__slide__thumbnail {
+  opacity: 1;
+}
+
+.out-of-stock-variant {
+  position: relative;
+}
+
+.out-of-stock-variant:after {
+  position: absolute;
+  content: '';
+  top: 50%;
+  right: -5%;
+  width: 110%;
+  height: 1px;
+  background-color: rgba(178, 169, 174, 1);
+}
+
+.out-of-stock-variant:after {
+  transform: rotate(151deg);
+}

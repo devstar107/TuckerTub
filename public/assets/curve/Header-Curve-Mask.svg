@@ -1,0 +1,19 @@
+<svg
+          width="1440"
+          height="500"
+          viewBox="0 0 1440 500"
+          xmlns="http://www.w3.org/2000/svg"
+          className="pointer-events-none absolute"
+        >
+          <clipPath
+            id="clip"
+            clipPathUnits="objectBoundingBox"
+            transform="scale(0.000694444444444, 0.001680672268908)"
+          >
+            <path
+              id="path"
+              d="M0,0 L1440.01025,0 C1440.01025,76 1440.01025,114 1440.01025,114 C952.800926,113.708648 593.552979,210 0,210 C0,210 0,140 0,0 Z"
+            />
+          </clipPath>
+          <use xlinkHref="#a" fill="#FFF7F0" fillRule="evenodd" />
+        </svg>

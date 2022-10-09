@@ -1,0 +1,28 @@
+import { NextSeo } from 'next-seo'
+
+import { Layout } from '~/components/common'
+
+export default function Error({ message }: { message?: string }) {
+  return (
+    <>
+      <NextSeo
+        title={`${message || 'Error'} | Tucker Tub`}
+        description="Error Description"
+        openGraph={{
+          title: `${message || 'Error'} | Tucker Tub`,
+          description: 'Error Description',
+          url: process.env.NEXT_PUBLIC_FRONTEND_URL,
+          type: 'website',
+          locale: 'en_AU',
+          site_name: 'Tucker Tub'
+        }}
+      />
+
+      <Layout>
+        <span className="fixed inset-0 flex h-full w-full items-center justify-center">
+          {message || 'Something went wrong'}
+        </span>
+      </Layout>
+    </>
+  )
+}
