@@ -2,8 +2,9 @@
 /* eslint-disable no-use-before-define */
 import type { InferGetStaticPropsType } from 'next'
 import { NextSeo } from 'next-seo'
-
-import { ProductImage } from '~/components/commerce/product-image'
+import { GalleryProducts } from '~/components/commerce/product-gallery'
+import { ArrowRight } from '~/components/common/icons'
+import { GalleryProductImage, ProductImage } from '~/components/commerce/product-image'
 import { RecommendedProducts } from '~/components/commerce/recommended-products'
 import { VariantCard } from '~/components/commerce/variant-card'
 import { Breadcrumbs, Layout } from '~/components/common'
@@ -41,7 +42,16 @@ export default function Product({
           <div className="mx-auto w-full px-8 sm:w-[90%] sm:px-0 md:w-[80%] lg:w-[80%]">
             <div className="grid grid-cols-1 gap-8 text-colorFourteen sm:gap-16 md:gap-24 lg:grid-cols-2 lg:gap-[149px] ">
               {/* Image section */}
-              <ProductImage productData={product} isSinglePage />
+              <div className="">
+                <div className='w-full lg:w-full'><GalleryProductImage productData={product} isSinglePage /></div>
+                <div className='mt-[5%] w-full'>
+                  {recommendedProducts.length > 0 && (
+                    <GalleryProducts
+                      GalleryProducts={recommendedProducts}
+                    />
+                  )}
+                </div>
+              </div>
               {/* Product Section */}
               <VariantCard
                 key={product.id}

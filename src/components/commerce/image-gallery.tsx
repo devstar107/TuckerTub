@@ -1,7 +1,5 @@
 import NextImage from 'next/future/image'
 import NextLink from 'next/link'
-import InnerImageZoom from 'react-inner-image-zoom'
-import 'react-inner-image-zoom/lib/InnerImageZoom/styles.css'
 
 import { ImageWrapper } from '~/ui'
 
@@ -52,7 +50,7 @@ function RenderSpecialProductCondition({
   return null
 }
 
-export const ProductImage = (props: ProductImageProps) => {
+export const GalleryImage = (props: ProductImageProps) => {
   const { productData, isSinglePage, categoryHandle } = props
   // console.log('ProductImage props', props)
   const PRODUCT_NEW_TIMER = 30 * 24 * 60 * 60 * 1000 // 30 days
@@ -74,11 +72,8 @@ export const ProductImage = (props: ProductImageProps) => {
           'visible absolute opacity-100 transition-all duration-700 group-hover:invisible group-hover:opacity-0'
         }`}
         src={productData.images?.[0]?.src ?? '/assets/images/product-image-placeholder.svg'}
-        sizes="(min-width: 75em) 33vw,
-        (min-width: 48em) 50vw,
-        100vw"
-        width={615}
-        height={615}
+        width={173}
+        height={173}
         alt={productData.name}
         priority
       />
@@ -89,68 +84,10 @@ export const ProductImage = (props: ProductImageProps) => {
           sizes="(min-width: 75em) 33vw,
           (min-width: 48em) 50vw,
           100vw"
-          width={615}
-          height={615}
+          width={173}
+          height={173}
           alt={productData.name}
           priority
-        />
-      )}
-    </ImageWrapper>
-  )
-
-  if (isSinglePage) {
-    return imageWrapperComponent
-  }
-
-  return (
-    <NextLink href={`/shop/${categoryHandle}/${productData.slug}`}>
-      {imageWrapperComponent}
-    </NextLink>
-  )
-}
-export const GalleryProductImage = (props: ProductImageProps) => {
-  const { productData, isSinglePage, categoryHandle } = props
-  // console.log('ProductImage props', props)
-  const PRODUCT_NEW_TIMER = 30 * 24 * 60 * 60 * 1000 // 30 days
-
-  const dateCreated = new Date(productData.date_created)
-  const isProductNew = new Date().getTime() - dateCreated.getTime() < PRODUCT_NEW_TIMER
-
-  const imageWrapperComponent = (
-    <ImageWrapper className="group">
-      {!productData.purchasable ? (
-        <span className="absolute left-4 top-4 z-10 rounded-[50px] border border-white bg-black py-2 px-3 text-white">
-          SOLD OUT
-        </span>
-      ) : null}
-      <RenderSpecialProductCondition onSale={productData.on_sale} isNew={isProductNew} />
-      <InnerImageZoom
-        className={`h-full w-full rounded-[10px] bg-white object-contain ${
-          productData.images.length > 1 &&
-          'visible absolute opacity-100 transition-all duration-700 group-hover:invisible group-hover:opacity-0'
-        }`}
-        src={productData.images?.[0]?.src ?? '/assets/images/product-image-placeholder.svg'}
-        sizes="(min-width: 75em) 33vw,
-        (min-width: 48em) 50vw,
-        100vw"
-        width={560}
-        height={560}
-        alt={productData.name}
-        priority
-        moveType="drag"
-      />
-      {productData.images.length > 1 && (
-        <InnerImageZoom
-          className="invisible absolute h-full w-full rounded-[10px] object-cover opacity-0 transition-all duration-700 group-hover:visible group-hover:opacity-100"
-          src={productData.images[1].src}
-          sizes="(min-width: 75em) 33vw,
-          (min-width: 48em) 50vw,
-          100vw"
-          width={560}
-          height={560}
-          alt={productData.name}
-          priority
-          moveType="drag"
         />
       )}
     </ImageWrapper>

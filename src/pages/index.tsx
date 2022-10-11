@@ -2,7 +2,6 @@ import { NextSeo } from 'next-seo'
 import dynamic from 'next/dynamic'
 
 import { Layout } from '~/components/common'
-import { EmblaCarousel } from '~/components/common/carousel'
 import { homepageSliderData } from '~/components/common/carousel/data/home-slider-data'
 import { wooCommerceAPI } from '~/lib/WooCommerce'
 import type { ArticleProps, Product } from '~/types'
@@ -11,6 +10,14 @@ interface HomeProps {
   products: Product[]
   articles: ArticleProps
 }
+
+const EmblaCarousel = dynamic( 
+  async () => {
+    const component = await import('~/components/common/carousel')
+    return component.EmblaCarousel
+},
+{ ssr: false }
+)
 
 const DynamicBlockPersonalised = dynamic(
   async () => {
